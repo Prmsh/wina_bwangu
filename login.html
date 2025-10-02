@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wina Bwangu - Login</title><link rel="stylesheet" href="styles.css"></head>
+<body style="background:url('landing\ page.jpg') center/cover no-repeat;">
+<div class="overlay"></div>
+<div class="auth-wrap">
+  <div class="auth-card" id="loginCard">
+    <img src="logo.webp" alt="Wina Bwangu Logo" class="logo"/>
+    <p class="muted">Agent Portal</p>
+    <input id="loginEmail" type="email" placeholder="you@example.com" autocomplete="username"/>
+    <div class="password-field"><input id="loginPassword" type="password" placeholder="Password" autocomplete="current-password"/><span class="eye" role="button" onclick="togglePassword('loginPassword', this)" aria-label="Show password">👁️</span></div>
+    <button class="primary" onclick="handleLogin()">Sign in</button>
+    <p class="small">No account? <a href="#" onclick="showRegister()">Register</a></p>
+    <div id="loginMsg" class="form-msg"></div>
+  </div>
+  <div class="auth-card" id="registerCard" style="display:none">
+    <h2>Create account</h2>
+    <p class="muted">Register as an agent</p>
+    <input id="regEmail" type="email" placeholder="you@example.com" autocomplete="email"/>
+    <div class="password-field"><input id="regPassword" type="password" placeholder="Password (min 8 characters)" autocomplete="new-password"/><span class="eye" role="button" onclick="togglePassword('regPassword', this)" aria-label="Show password">👁️</span></div>
+    <button class="primary" onclick="handleRegister()">Create account</button>
+    <p class="small">Already have an account? <a href="#" onclick="showLogin()">Sign in</a></p>
+    <div id="registerMsg" class="form-msg"></div>
+  </div>
+</div>
+<script src="script.js"></script>
+<script>window.addEventListener('DOMContentLoaded',()=>{ if(location.hash==='#register') showRegister(); else showLogin(); });</script>
+</body></html>

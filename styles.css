@@ -1,0 +1,68 @@
+
+:root{--blue:#2563eb;--accent:#06b6d4;--muted:#6b7280}
+*{box-sizing:border-box}
+body{font-family:Inter,Segoe UI,Helvetica,Arial;margin:0;color:#111827;min-height:100vh;background:#fff;}
+.logo {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 16px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);backdrop-filter:blur(6px);z-index:0}
+.overlay.dark{background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55));}
+.landing{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:100vh;color:#fff;padding:24px}
+.landing h1{font-size:40px;margin-bottom:8px;text-shadow:0 3px 10px rgba(0,0,0,0.6)}
+.actions{display:flex;gap:12px}
+.primary,.secondary{padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:600;cursor:pointer;transition:all 0.18s ease-in-out}
+.primary{background:var(--blue);color:#fff;border:none}
+.secondary{background:#f3f4f6;color:#111827;border:1px solid #d1d5db}
+.primary:hover,.secondary:hover{transform:scale(1.03);box-shadow:0 6px 18px rgba(16,24,40,0.06)}
+.auth-wrap{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
+.auth-card{width:360px;background:rgba(255,255,255,0.12);padding:20px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.08);border:1px solid rgba(255,255,255,0.18);text-align:center;color:#fff}
+.auth-card input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:#000}
+.password-field{position:relative}.password-field input{padding-right:40px}.password-field .eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer}
+.form-msg{margin-top:8px;font-size:13px;color:#111827}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:var(--blue);color:#fff;position:sticky;top:0;z-index:2}
+.hamburger{
+    display:none;
+    background:transparent;border:none;color:#fff;font-size:22px;cursor:pointer}
+.topnav{display:flex;gap:14px}
+.topnav a{color:#fff;text-decoration:none;font-weight:600}
+.container{max-width:1100px;margin:22px auto;padding:0 16px;z-index:1}
+.overview{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:16px;margin-bottom:18px}
+.card{background:#fff;border-radius:10px;padding:16px;box-shadow:0 6px 18px rgba(2,6,23,0.06);border:1px solid #eef2f6}
+.big-number{font-size:28px;font-weight:800;margin-top:6px}
+.cards-row{display:grid;grid-template-columns:1fr 420px;gap:16px}
+.table-wrap{overflow:auto;max-height:360px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid #eee}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center}
+.output{padding:10px;background:#f8fafc;border-radius:8px;min-height:40px;display:flex;align-items:center}
+.primary{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:none;cursor:pointer}
+.secondary{background:#f3f4f6;color:#111827;border:1px solid #d1d5db;padding:8px 12px;border-radius:8px;cursor:pointer}
+.btn-link{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;background:transparent;border-radius:8px;border:1px solid #e6eef7;color:var(--muted);text-decoration:none}
+@media(max-width:900px){.overview{grid-template-columns:1fr}.cards-row{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.topnav{display:none;position:absolute;right:16px;top:56px;background:rgba(255,255,255,0.95);backdrop-filter:blur(6px);border-radius:8px;padding:8px;flex-direction:column}.hamburger{display:block}}
+/* --- Mobile Navigation Fix --- */
+@media (max-width: 768px) {
+  .topnav {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 1000;
+  }
+  .topnav.active {
+    display: flex;
+  }
+}
+
+/* Prevent zoom on input fields (minimum 16px font size) */
+input, textarea, select {
+  font-size: 16px;
+}
