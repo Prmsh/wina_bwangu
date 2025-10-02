@@ -5,46 +5,118 @@ function togglePassword(id, el){
   if(input.type === 'password'){ input.type = 'text'; el.textContent = '🙈'; }
   else { input.type = 'password'; el.textContent = '👁️'; }
 }
+
 function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+function showFormMessage(elementId, message, isSuccess = false) {
+  const msg = document.getElementById(elementId);
+  if (!msg) return;
+  
+  msg.innerText = message;
+  if (isSuccess) {
+    msg.style.background = 'rgba(16, 185, 129, 0.9)'; // Success green
+  } else {
+    msg.style.background = 'rgba(0, 0, 0, 0.6)'; // Default dark
+  }
+}
 
 function handleRegister(){
   const email = document.getElementById('regEmail').value?.trim();
   const pw = document.getElementById('regPassword').value || '';
-  const msg = document.getElementById('registerMsg');
-  if(msg) msg.innerText = '';
-  if(!isValidEmail(email)){ if(msg) msg.innerText = 'Please enter a valid email.'; return; }
-  if(pw.length < 8){ if(msg) msg.innerText = 'Password must be at least 8 characters.'; return; }
+  const msgId = 'registerMsg';
+  
+  showFormMessage(msgId, ''); // Clear message
+  
+  if(!email) {
+    showFormMessage(msgId, 'Please enter your email.');
+    return;
+  }
+  
+  if(!isValidEmail(email)){ 
+    showFormMessage(msgId, 'Please enter a valid email.');
+    return;
+  }
+  
+  if(!pw) {
+    showFormMessage(msgId, 'Please enter a password.');
+    return;
+  }
+  
+  if(pw.length < 8){ 
+    showFormMessage(msgId, 'Password must be at least 8 characters.');
+    return;
+  }
+  
   localStorage.setItem('user_' + email, pw);
-  if(msg) msg.innerText = 'Registration successful. Please sign in.';
+  showFormMessage(msgId, 'Registration successful! Please sign in.', true);
+  setTimeout(() => showLogin(), 1500);
 }
 
 function handleLogin(){
   const email = document.getElementById('loginEmail').value?.trim();
   const pw = document.getElementById('loginPassword').value || '';
-  const msg = document.getElementById('loginMsg');
-  if(msg) msg.innerText = '';
+  const msgId = 'loginMsg';
+  
+  showFormMessage(msgId, ''); // Clear message
+  
+  if(!email) {
+    showFormMessage(msgId, 'Please enter your email.');
+    return;
+  }
+  
+  if(!pw) {
+    showFormMessage(msgId, 'Please enter your password.');
+    return;
+  }
+  
   const stored = localStorage.getItem('user_' + email);
   if(stored && stored === pw){
     localStorage.setItem('wb_current_user', email);
-    if(msg) msg.innerText = 'Signed in. Redirecting...';
-    setTimeout(()=> window.location.href = 'dashboard.html', 700);
+    showFormMessage(msgId, 'Signed in! Redirecting...', true);
+    setTimeout(() => window.location.href = 'dashboard.html', 700);
   } else {
-    if(msg) msg.innerText = 'Invalid email or password.';
+    showFormMessage(msgId, 'Invalid email or password.');
   }
 }
 
-function showRegister(){ document.getElementById('loginCard').style.display='none'; document.getElementById('registerCard').style.display='block'; }
-function showLogin(){ document.getElementById('registerCard').style.display='none'; document.getElementById('loginCard').style.display='block'; }
+function showRegister(){ 
+  document.getElementById('loginCard').classList.add('hidden');
+  document.getElementById('registerCard').classList.remove('hidden');
+}
+
+function showLogin(){ 
+  document.getElementById('registerCard').classList.add('hidden');
+  document.getElementById('loginCard').classList.remove('hidden');
+}
 
 function initHamburger(){
   const ham = document.getElementById('hamburger');
   const nav = document.getElementById('topnav');
   if(!ham || !nav) return;
-  ham.addEventListener('click', ()=>{
-    if(nav.style.display === 'flex' || nav.style.display === 'block'){ nav.style.display = 'none'; }
-    else { nav.style.display = 'flex'; nav.style.flexDirection = 'column'; }
+  
+  ham.addEventListener('click', (e) => {
+    e.stopPropagation();
+    nav.classList.toggle('show');
   });
-  window.addEventListener('resize', ()=>{ if(window.innerWidth > 900) nav.style.display = ''; });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !ham.contains(e.target)) {
+      nav.classList.remove('show');
+    }
+  });
+
+  // Prevent menu from closing when clicking inside it
+  nav.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  // Hide menu on window resize
+  window.addEventListener('resize', () => { 
+    if(window.innerWidth > 900) {
+      nav.classList.remove('show');
+    }
+  });
 }
 
 const GLOBAL_MONTHLY_LIMIT = 50000; // ZMW
@@ -157,15 +229,8 @@ function exportCSV(){ if(!transactions.length){ alert('No transactions to export
 function refreshDashboard(){ initDashboard(); }
 function handleLogout(){ localStorage.removeItem('wb_current_user'); window.location.href='index.html'; }
 
-window.addEventListener('DOMContentLoaded',()=>{ initHamburger(); if(location.pathname.endsWith('dashboard.html')) initDashboard(); if(location.pathname.endsWith('transaction.html')) loadTransactions(); });
-// --- Mobile Navigation Toggle ---
-document.addEventListener("DOMContentLoaded", () => {
-  const hamburger = document.getElementById("hamburger");
-  const topnav = document.getElementById("topnav");
-
-  if (hamburger && topnav) {
-    hamburger.addEventListener("click", () => {
-      topnav.classList.toggle("active");
-    });
-  }
+window.addEventListener('DOMContentLoaded',()=>{ 
+  initHamburger(); 
+  if(location.pathname.endsWith('dashboard.html')) initDashboard(); 
+  if(location.pathname.endsWith('transaction.html')) loadTransactions(); 
 });

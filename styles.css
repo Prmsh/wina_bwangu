@@ -38,6 +38,63 @@ body.landing-bg {
 }
 
 /* ==============================
+   Navigation
+============================== */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.topnav {
+  display: flex;
+  gap: 14px;
+}
+
+.topnav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.topnav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 900px) {
+  .hamburger {
+    display: block;
+  }
+
+  .topnav {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 8px;
+    border-radius: 8px;
+    flex-direction: column;
+    min-width: 200px;
+    gap: 4px;
+  }
+
+  .topnav.show {
+    display: flex;
+  }
+
+  .topnav a {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* ==============================
    Overlay
 ============================== */
 .overlay {
@@ -171,9 +228,23 @@ body.landing-bg {
 }
 
 .form-msg {
-  margin-top: 8px;
+  margin-top: 12px;
   font-size: 13px;
-  color: #111827;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 12px;
+  border-radius: 6px;
+  min-height: 20px;
+  transition: all 0.2s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.form-msg:not(:empty) {
+  opacity: 1;
+  transform: translateY(0);
+  border-radius: 4px;
+  min-height: 20px;
 }
 
 /* ==============================
@@ -198,6 +269,7 @@ body.landing-bg {
   color: #fff;
   font-size: 22px;
   cursor: pointer;
+  padding: 8px;
 }
 
 .topnav {
@@ -208,7 +280,46 @@ body.landing-bg {
 .topnav a {
   color: #fff;
   text-decoration: none;
-  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.topnav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 900px) {
+  .hamburger {
+    display: block;
+  }
+
+  .topnav {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 8px;
+    border-radius: 8px;
+    flex-direction: column;
+    min-width: 200px;
+    gap: 4px;
+  }
+
+  .topnav.show {
+    display: flex;
+  }
+
+  .topnav a {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+@media (max-width: 900px) {
+  .topnav a {
+    color: #111827;
+  }
 }
 
 /* ==============================
@@ -353,6 +464,10 @@ td {
     border-radius: 8px;
     padding: 8px;
     flex-direction: column;
+  }
+  
+  .topnav.show {
+    display: flex;
   }
 
   .hamburger {

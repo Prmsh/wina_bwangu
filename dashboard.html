@@ -2,10 +2,15 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Wina Bwangu - Dashboard</title><link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head><body class="plain-bg">
-        <header class="nav"><div class="brand">Wina Bwangu</div>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
-            <nav id="topnav" class="topnav"><a href="dashboard.html" class="active">Dashboard</a>
-                <a href="transaction.html">Transactions</a><a href="#" onclick="handleLogout()">Logout</a></nav></header>
+        <header class="nav">
+            <div class="brand">Wina Bwangu</div>
+            <button type="button" class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="topnav">☰</button>
+            <nav id="topnav" class="topnav">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="transaction.html">Transactions</a>
+                <a href="#" onclick="handleLogout()">Logout</a>
+            </nav>
+        </header>
                 <main class="main container"><section class="overview"><div class="card big"><h3>Total Revenue (ZMW)</h3><div id="totalRev" class="big-number">0</div>
                 </div><div class="card"><h4>Cumulative Transactions</h4><div id="txnCount">0</div></div><div class="card"><h4>Monthly Limit Remaining</h4><div id="remainingLimit">-</div>
             </div><div class="card"><h4>Total Tax Collected</h4><div id="totalTax">0</div></div></section><section class="cards-row"><div class="card full"><h3>Revenue by Service</h3>
